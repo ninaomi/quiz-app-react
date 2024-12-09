@@ -35,9 +35,12 @@ function App() {
   }
 
   useEffect(() => {
-    fetchQuestions();
+    setTimeout(() => {fetchQuestions();
+    
+    },1000)
   }, []);
 
+  
   function shutup(lewis){
        if (lewis===questions[index].correct_answer) changescore(score + 1);
 
