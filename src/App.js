@@ -89,7 +89,7 @@ function App() {
         {[
           questions[currentQuestionIndex].correct_answer,
           ...questions[currentQuestionIndex].incorrect_answers,
-        ]?.map((answer) => (
+        ]?.sort().map((answer) => (
           <button
             className="answer-button"
             onClick={() => handleAnswerSelection(answer)}
