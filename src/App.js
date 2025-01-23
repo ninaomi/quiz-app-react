@@ -19,7 +19,16 @@ function App() {
       "https://opentdb.com/api.php?amount=5&category=9&difficulty=easy&type=multiple"
     );
     const data = await response.json();
-    setQuestions(data.results);
+    const parser = new DOMParser();
+  const decodedQuestions = data.results.map((question) => ({
+    ...question,
+    question: parser.parseFromString(question.question, "text/html").body.textContent,
+    correct_answer: parser.parseFromString(question.correct_answer, "text/html").body.textContent,
+    incorrect_answers: question.incorrect_answers.map((answer) =>
+      parser.parseFromString(answer, "text/html").body.textContent
+    ),
+  }));
+    setQuestions(decodedQuestions);
     setLoading(false);
   }
 
